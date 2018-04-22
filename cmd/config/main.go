@@ -10,6 +10,7 @@ import (
 
 	"github.com/nicksnyder/service/pkg/debug"
 	"github.com/nicksnyder/service/pkg/env"
+	apphttp "github.com/nicksnyder/service/pkg/http"
 )
 
 var configFile string
@@ -27,9 +28,9 @@ func main() {
 	}
 	configFile = filepath.Join(path, "config.json")
 
-	server := http.NewServeMux()
-	server.HandleFunc("/debug", debug.Serve)
-	server.HandleFunc("/file", handleFile)
+	server := apphttp.NewServeMux()
+	server.HandleErrFunc("/debug", debug.Serve)
+	server.HandleErrFunc("/debug", handleFile)
 
 	log.Printf("listening on :%s\n", port)
 	if err := http.ListenAndServe(":"+port, server); err != nil {
@@ -37,12 +38,14 @@ func main() {
 	}
 }
 
-func handleFile(w http.ResponseWriter, r *http.Request) {
+func handleFile(w http.ResponseWriter, r *http.Request) error {
+	if write := r.FormValue("write"); write != "" {
+		return ioutil.WriteFile(configFile, []byte(write), 0644)
+	}
 	b, err := ioutil.ReadFile(configFile)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
-		return
+		return err
 	}
 	w.Write(b)
+	return nil
 }

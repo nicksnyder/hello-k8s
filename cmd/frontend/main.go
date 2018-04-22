@@ -7,14 +7,15 @@ import (
 
 	"github.com/nicksnyder/service/pkg/debug"
 	"github.com/nicksnyder/service/pkg/env"
+	apphttp "github.com/nicksnyder/service/pkg/http"
 )
 
 func main() {
 	port := env.Get("FRONTEND_PORT", "8080")
 
-	server := http.NewServeMux()
-	server.HandleFunc("/debug", debug.Serve)
-	server.HandleFunc("/config", handleConfig)
+	server := apphttp.NewServeMux()
+	server.HandleErrFunc("/debug", debug.Serve)
+	server.HandleErrFunc("/config", handleConfig)
 
 	log.Printf("listening on :%s\n", port)
 	if err := http.ListenAndServe(":"+port, server); err != nil {
@@ -22,14 +23,14 @@ func main() {
 	}
 }
 
-func handleConfig(w http.ResponseWriter, r *http.Request) {
+func handleConfig(w http.ResponseWriter, r *http.Request) error {
 	resp, err := http.Get("http://config/file")
 	if err != nil {
-		log.Println("couldn't fetch config", err)
-		return
+		return err
 	}
 	defer resp.Body.Close()
 	if _, err := io.Copy(w, resp.Body); err != nil {
-		log.Println("failed to copy config", err)
+		return err
 	}
+	return nil
 }
