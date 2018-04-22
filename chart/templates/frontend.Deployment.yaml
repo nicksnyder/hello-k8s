@@ -17,14 +17,15 @@ spec:
         image: "nickdsnyder/frontend:{{ .Chart.Version }}"
         env:
         - name: FRONTEND_PORT
-          value: 8080
+          value: "{{ .Values.frontend.internalPort }}"
         ports:
-        - http: 8080
+        - containerPort: {{ .Values.frontend.internalPort }} 
+          name: http
         livenessProbe:
           httpGet:
             path: /healthz
-            port: 8080
+            port: {{ .Values.frontend.internalPort }} 
         readinessProbe:
           httpGet:
             path: /healthz
-            port: 8080
+            port: {{ .Values.frontend.internalPort }} 
