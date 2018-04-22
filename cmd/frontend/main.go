@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/nicksnyder/service/pkg/debug"
 	"github.com/nicksnyder/service/pkg/env"
 	apphttp "github.com/nicksnyder/service/pkg/http"
 )
@@ -14,7 +13,6 @@ func main() {
 	port := env.Get("FRONTEND_PORT", "8080")
 
 	server := apphttp.NewServeMux()
-	server.HandleErrFunc("/debug", debug.Serve)
 	server.HandleErrFunc("/config", handleConfig)
 
 	log.Printf("listening on :%s\n", port)

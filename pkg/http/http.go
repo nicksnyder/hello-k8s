@@ -3,6 +3,8 @@ package http
 import (
 	"log"
 	"net/http"
+
+	"github.com/nicksnyder/service/pkg/debug"
 )
 
 type ServeMux struct {
@@ -10,7 +12,14 @@ type ServeMux struct {
 }
 
 func NewServeMux() *ServeMux {
-	return &ServeMux{}
+	m := &ServeMux{}
+	m.HandleFunc("/healthz", handleHealthz)
+	m.HandleErrFunc("/debug", debug.Serve)
+	return m
+}
+
+func handleHealthz(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("OK"))
 }
 
 func (mux *ServeMux) HandleErrFunc(pattern string, handlerErrFunc HandlerErrFunc) {

@@ -8,7 +8,6 @@ import (
 	"os/user"
 	"path/filepath"
 
-	"github.com/nicksnyder/service/pkg/debug"
 	"github.com/nicksnyder/service/pkg/env"
 	apphttp "github.com/nicksnyder/service/pkg/http"
 )
@@ -29,7 +28,6 @@ func main() {
 	configFile = filepath.Join(path, "config.json")
 
 	server := apphttp.NewServeMux()
-	server.HandleErrFunc("/debug", debug.Serve)
 	server.HandleErrFunc("/file", handleFile)
 
 	log.Printf("listening on :%s\n", port)

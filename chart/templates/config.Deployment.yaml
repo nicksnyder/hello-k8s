@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config 
+spec:
+  replicas: {{ .Values.config.replicaCount }}
+  selector:
+    matchLabels:
+      app: config 
+  template:
+    metadata:
+      labels:
+        app: config 
+    spec:
+      containers:
+      - name: config 
+        image: "nickdsnyder/config:{{ .Chart.Version }}"
+        env:
+        - name: CONFIG_PORT
+          value: 8080
+        ports:
+        - http: 8080
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
