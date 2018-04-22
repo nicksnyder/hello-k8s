@@ -2,9 +2,10 @@
 
 This is a demo of a multi-service application.
 
-## Deploy to minikube
+## Deploy to minikube on your machine
 
-1.  Install minikube
+1.  Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and [minikube](https://github.com/kubernetes/minikube/releases).
+1.  Start minikube.
     ```
     $ minikube start
     Starting local Kubernetes v1.10.0 cluster...
@@ -24,7 +25,7 @@ This is a demo of a multi-service application.
     Kubectl is now configured to use the cluster.
     Loading cached images from config file.
     ```
-1.  Deploy to kubernetes
+1.  Deploy to kubernetes.
     ```
     helm template ./chart > /tmp/chart && kubectl apply -f /tmp/chart
     ```
