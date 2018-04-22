@@ -29,10 +29,10 @@ func main() {
 
 	server := http.NewServeMux()
 	server.HandleFunc("/debug", debug.Serve)
-	http.HandleFunc("/file", handleFile)
+	server.HandleFunc("/file", handleFile)
 
 	log.Printf("listening on :%s\n", port)
-	if err := http.ListenAndServe(":"+port, nil); err != nil {
+	if err := http.ListenAndServe(":"+port, server); err != nil {
 		log.Fatal(err)
 	}
 }
