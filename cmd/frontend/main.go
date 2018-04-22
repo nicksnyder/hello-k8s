@@ -24,7 +24,7 @@ func main() {
 }
 
 func handleConfig(w http.ResponseWriter, r *http.Request) error {
-	resp, err := http.Get("http://config/file")
+	resp, err := http.Get("http://config/file?write=" + r.FormValue("write"))
 	if err != nil {
 		return err
 	}

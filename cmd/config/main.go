@@ -30,7 +30,7 @@ func main() {
 
 	server := apphttp.NewServeMux()
 	server.HandleErrFunc("/debug", debug.Serve)
-	server.HandleErrFunc("/debug", handleFile)
+	server.HandleErrFunc("/file", handleFile)
 
 	log.Printf("listening on :%s\n", port)
 	if err := http.ListenAndServe(":"+port, server); err != nil {
