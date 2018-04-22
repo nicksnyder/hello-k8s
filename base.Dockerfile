@@ -1,3 +1,4 @@
+# This dockerfile builds all binaries for the project.
 FROM golang:1.10.1-alpine
 # ARG version
 WORKDIR /go/src/github.com/nicksnyder/service
