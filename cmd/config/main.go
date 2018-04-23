@@ -39,7 +39,9 @@ func main() {
 
 func handleFile(w http.ResponseWriter, r *http.Request) error {
 	if write := r.FormValue("write"); write != "" {
-		return ioutil.WriteFile(configFile, []byte(write), 0644)
+		if err := ioutil.WriteFile(configFile, []byte(write), 0644); err != nil {
+			return err
+		}
 	}
 	b, err := ioutil.ReadFile(configFile)
 	if err != nil {
