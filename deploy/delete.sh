@@ -2,4 +2,4 @@
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-helm template ./chart | kubectl replace -f -
+helm template ./chart | kubectl delete -f -

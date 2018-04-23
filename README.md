@@ -33,3 +33,11 @@ This is a demo of a multi-service application.
     ```
     minikube service frontend
     ```
+
+## TODO
+
+* Add label for easy teardown of all services.
+* Config service persistent volume and only 1 replica
+* Don't emit service definitions when 0 replicas?
+* Image versioning?
+* remove internalPort?

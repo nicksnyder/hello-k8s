@@ -8,6 +8,7 @@ import (
 	"os/user"
 	"path/filepath"
 
+	"github.com/nicksnyder/service/pkg/debug"
 	"github.com/nicksnyder/service/pkg/env"
 	apphttp "github.com/nicksnyder/service/pkg/http"
 )
@@ -15,7 +16,7 @@ import (
 var configFile string
 
 func main() {
-	port := env.Get("CONFIG_PORT", "7070")
+	port := env.MustGet("CONFIG_PORT")
 
 	path := os.Getenv("CONFIG_PATH")
 	if path == "" {
@@ -44,6 +45,9 @@ func handleFile(w http.ResponseWriter, r *http.Request) error {
 	if err != nil {
 		return err
 	}
-	w.Write(b)
-	return nil
+	if err := debug.WriteData(w); err != nil {
+		return err
+	}
+	_, err = w.Write(b)
+	return err
 }

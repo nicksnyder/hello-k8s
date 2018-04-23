@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	port := env.Get("FRONTEND_PORT", "8080")
+	port := env.MustGet("FRONTEND_PORT")
 
 	server := apphttp.NewServeMux()
 	server.HandleErrFunc("/config", handleConfig)

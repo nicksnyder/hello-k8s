@@ -3,10 +3,11 @@ apiVersion: v1
 metadata:
   name: frontend
 spec:
-  type: NodePort
+  type: {{ .Values.frontend.serviceType }} 
   selector:
     name: frontend 
   ports:
   - protocol: TCP 
     port: 80
+    nodePort: 30080
     targetPort: http
