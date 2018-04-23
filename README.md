@@ -27,7 +27,7 @@ This is a demo of a multi-service application.
     ```
 1.  Deploy to kubernetes.
     ```
-    ./build/apply.sh
+    ./deploy/apply.sh
     ```
 1.  Open frontend in browser.
     ```
@@ -41,3 +41,4 @@ This is a demo of a multi-service application.
 * Don't emit service definitions when 0 replicas?
 * Image versioning? Deploy dev version? Local docker registry?
 * remove internalPort?
+* NOTES.txt
