@@ -7,5 +7,5 @@ spec:
     app: config 
   ports:
   - protocol: TCP 
-    port: 80
+    port: {{ .Values.config.servicePort }}
     targetPort: http

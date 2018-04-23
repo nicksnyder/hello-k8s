@@ -27,5 +27,5 @@ This is a demo of a multi-service application.
     ```
 1.  Deploy to kubernetes.
     ```
-    helm template ./chart > /tmp/chart && kubectl apply -f /tmp/chart
+    helm template ./chart | kubectl apply -f -
     ```
