@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/nicksnyder/service/pkg/debug"
+	"github.com/nicksnyder/hello-server/pkg/debug"
 )
 
 type ServeMux struct {
@@ -13,14 +13,16 @@ type ServeMux struct {
 
 func NewServeMux() *ServeMux {
 	m := &ServeMux{}
-	m.HandleFunc("/", handleHealthz)
-	m.HandleFunc("/healthz", handleHealthz)
-	m.HandleErrFunc("/debug", debug.Serve)
+	m.HandleErrFunc("/", handleHello)
 	return m
 }
 
-func handleHealthz(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("OK"))
+func handleHello(w http.ResponseWriter, r *http.Request) error {
+	_, err := w.Write([]byte("Hello from\n"))
+	if err != nil {
+		return err
+	}
+	return debug.WriteData(w)
 }
 
 func (mux *ServeMux) HandleErrFunc(pattern string, handlerErrFunc HandlerErrFunc) {

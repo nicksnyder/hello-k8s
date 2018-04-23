@@ -1,4 +1,4 @@
-# Demo application
+# Hello server
 
 This is a demo of a multi-service application.
 
@@ -27,7 +27,7 @@ This is a demo of a multi-service application.
     ```
 1.  Deploy to kubernetes.
     ```
-    helm template ./chart | kubectl apply -f -
+    ./build/apply.sh
     ```
 1.  Open frontend in browser.
     ```

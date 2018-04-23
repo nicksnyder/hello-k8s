@@ -8,9 +8,9 @@ import (
 	"os/user"
 	"path/filepath"
 
-	"github.com/nicksnyder/service/pkg/debug"
-	"github.com/nicksnyder/service/pkg/env"
-	apphttp "github.com/nicksnyder/service/pkg/http"
+	"github.com/nicksnyder/hello-server/pkg/debug"
+	"github.com/nicksnyder/hello-server/pkg/env"
+	apphttp "github.com/nicksnyder/hello-server/pkg/http"
 )
 
 var configFile string

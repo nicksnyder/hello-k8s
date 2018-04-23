@@ -23,9 +23,9 @@ spec:
           name: http
         livenessProbe:
           httpGet:
-            path: /healthz
+            path: /
             port: {{ .Values.frontend.internalPort }} 
         readinessProbe:
           httpGet:
-            path: /healthz
+            path: /
             port: {{ .Values.frontend.internalPort }} 

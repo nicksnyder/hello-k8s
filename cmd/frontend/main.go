@@ -5,8 +5,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/nicksnyder/service/pkg/env"
-	apphttp "github.com/nicksnyder/service/pkg/http"
+	"github.com/nicksnyder/hello-server/pkg/debug"
+	"github.com/nicksnyder/hello-server/pkg/env"
+	apphttp "github.com/nicksnyder/hello-server/pkg/http"
 )
 
 func main() {
@@ -30,5 +31,6 @@ func handleConfig(w http.ResponseWriter, r *http.Request) error {
 	if _, err := io.Copy(w, resp.Body); err != nil {
 		return err
 	}
-	return nil
+	w.Write([]byte("\n"))
+	return debug.WriteData(w)
 }

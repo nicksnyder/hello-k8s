@@ -3,17 +3,11 @@ package debug
 import (
 	"encoding/json"
 	"io"
-	"net/http"
 	"os"
 	"os/user"
 
-	"github.com/nicksnyder/service/pkg/version"
+	"github.com/nicksnyder/hello-server/pkg/version"
 )
-
-// Serve serves a debug http endpoint.
-func Serve(w http.ResponseWriter, r *http.Request) error {
-	return WriteData(w)
-}
 
 // WriteData writes debug data to w.
 func WriteData(w io.Writer) error {
