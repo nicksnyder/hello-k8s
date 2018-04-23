@@ -6,11 +6,11 @@ spec:
   replicas: {{ .Values.config.replicaCount }}
   selector:
     matchLabels:
-      app: config 
+      name: config 
   template:
     metadata:
       labels:
-        app: config 
+        name: config 
     spec:
       containers:
       - name: config 

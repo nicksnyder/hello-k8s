@@ -1,11 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: config 
+  name: frontend
 spec:
+  type: NodePort
   selector:
-    app: config 
+    name: frontend 
   ports:
   - protocol: TCP 
-    port: {{ .Values.config.servicePort }}
+    port: 80
     targetPort: http

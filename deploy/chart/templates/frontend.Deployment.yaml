@@ -6,11 +6,11 @@ spec:
   replicas: {{ .Values.frontend.replicaCount }}
   selector:
     matchLabels:
-      app: frontend
+      name: frontend
   template:
     metadata:
       labels:
-        app: frontend
+        name: frontend
     spec:
       containers:
       - name: frontend 
