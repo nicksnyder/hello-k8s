@@ -3,9 +3,9 @@
 # Declare variables to be passed into your templates.
 frontend:
   replicaCount: 1
-  servicePort: 80
+  servicePort: 8080
   internalPort: 8080
 config:
   replicaCount: 1
-  servicePort: 80
+  servicePort: 8080
   internalPort: 8080

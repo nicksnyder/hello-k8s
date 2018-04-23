@@ -29,3 +29,7 @@ This is a demo of a multi-service application.
     ```
     helm template ./chart | kubectl apply -f -
     ```
+1.  Open frontend in browser.
+    ```
+    minikube service frontend
+    ```

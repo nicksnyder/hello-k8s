@@ -13,6 +13,7 @@ type ServeMux struct {
 
 func NewServeMux() *ServeMux {
 	m := &ServeMux{}
+	m.HandleFunc("/", handleHealthz)
 	m.HandleFunc("/healthz", handleHealthz)
 	m.HandleErrFunc("/debug", debug.Serve)
 	return m
