@@ -6,7 +6,7 @@ import (
 	"os"
 	"os/user"
 
-	"github.com/nicksnyder/hello-server/pkg/version"
+	"github.com/nicksnyder/hello-server/pkg/binary"
 )
 
 // WriteData writes debug data to w.
@@ -22,8 +22,9 @@ func WriteData(w io.Writer) error {
 	enc := json.NewEncoder(w)
 	enc.SetIndent("", "  ")
 	return enc.Encode(map[string]interface{}{
-		"Version": version.Version(),
-		"Host":    host,
-		"User":    u,
+		"DockerTag":      binary.DockerTag(),
+		"ProductVersion": binary.ProductVersion(),
+		"Host":           host,
+		"User":           u,
 	})
 }

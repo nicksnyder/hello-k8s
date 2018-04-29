@@ -40,5 +40,4 @@ This is a demo of a multi-service application.
 * Config service persistent volume and only 1 replica
 * Don't emit service definitions when 0 replicas?
 * Image versioning? Deploy dev version? Local docker registry?
-* remove internalPort?
 * NOTES.txt

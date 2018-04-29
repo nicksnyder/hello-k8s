@@ -2,7 +2,9 @@ FROM base AS base
 
 # Create a minimal image with just the config service.
 FROM alpine:3.7
-RUN apk add --no-cache ca-certificates tini
+RUN apk add --no-cache \
+    ca-certificates \
+    tini
 COPY --from=base /go/bin/config /usr/local/bin/
 RUN addgroup -S config && adduser -S -G config config 
 USER config 
