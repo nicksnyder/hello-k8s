@@ -17,15 +17,15 @@ spec:
         image: "nickdsnyder/config:{{ .Chart.Version }}"
         env:
         - name: CONFIG_PORT
-          value: "{{ .Values.config.internalPort }}"
+          value: "8080"
         ports:
-        - containerPort: {{ .Values.config.internalPort }} 
+        - containerPort: 8080
           name: http
         livenessProbe:
           httpGet:
             path: /
-            port: {{ .Values.config.internalPort }}
+            port: 8080
         readinessProbe:
           httpGet:
             path: /
-            port: {{ .Values.config.internalPort }}
+            port: 8080

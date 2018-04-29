@@ -3,8 +3,6 @@
 # Declare variables to be passed into your templates.
 frontend:
   replicaCount: 2
-  internalPort: 8080
   serviceType: NodePort
 config:
   replicaCount: 1
-  internalPort: 8080
