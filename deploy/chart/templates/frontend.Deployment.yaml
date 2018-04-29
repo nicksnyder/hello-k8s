@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend 
-        image: "nickdsnyder/frontend:{{ .Chart.Version }}"
+        image: "nickdsnyder/frontend:{{ .Values.config.version }}"
         env:
         - name: FRONTEND_PORT
           value: "8080"

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: config 
-        image: "nickdsnyder/config:{{ .Chart.Version }}"
+        image: "nickdsnyder/config:{{ .Values.config.version }}"
         env:
         - name: CONFIG_PORT
           value: "8080"
