@@ -1,0 +1,12 @@
+sudo: required
+
+language: go 
+
+services:
+  - docker
+
+install:
+  - go get -t -v ./...
+
+script:
+  - ./build/ci.sh

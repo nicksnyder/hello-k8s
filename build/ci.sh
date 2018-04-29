@@ -4,6 +4,8 @@ set -e
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
+go test ./...
+
 DOCKER_TAG=`./build/docker_tag.sh`
 time docker build \
     -f ./build/base.Dockerfile \
