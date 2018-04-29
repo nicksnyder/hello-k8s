@@ -31,6 +31,8 @@ echo "Built $DOCKER_TAG"
 #     exit
 # fi
 
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
 time docker push nickdsnyder/frontend:$DOCKER_TAG
 time docker push nickdsnyder/config:$DOCKER_TAG
 time docker push nickdsnyder/frontend:latest
