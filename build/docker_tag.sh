@@ -1,3 +1,4 @@
 #!/bin/sh
 
-echo `date -u +"%Y-%m-%d"`-`git describe --always --dirty`
+DIRTY=`test -z "$(git status --porcelain)" || echo "-dirty"`
+echo `date -u +"%Y-%m-%d"`-`git rev-parse --short HEAD`$DIRTY
