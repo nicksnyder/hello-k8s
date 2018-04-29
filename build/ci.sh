@@ -40,8 +40,9 @@ time docker push nickdsnyder/config:latest
 
 echo "Pushed $DOCKER_TAG"
 
-./deploy/apply.sh \
-    --set frontend.version=$DOCKER_TAG \
-    --set config.version=$DOCKER_TAG
+# This is how auto-deploy would work from CI.
+# ./deploy/apply.sh \
+#     --set frontend.version=$DOCKER_TAG \
+#     --set config.version=$DOCKER_TAG
 
-echo "Deployed $DOCKER_TAG"
+# echo "Deployed $DOCKER_TAG"
