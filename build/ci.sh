@@ -37,16 +37,16 @@ echo "Built $version"
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 if [ "$TRAVIS_BRANCH" = "master" ] ; then
-    time docker push nickdsnyder/frontend:$version
-    time docker push nickdsnyder/config:$version
-    echo "Pushed :$version"
-
     time docker push nickdsnyder/frontend:insiders
     time docker push nickdsnyder/config:insiders
     echo "Pushed :insiders"
 fi
 
 if ./build/semver.sh $version; then
+    time docker push nickdsnyder/frontend:$version
+    time docker push nickdsnyder/config:$version
+    echo "Pushed :$version"
+
     time docker push nickdsnyder/frontend:latest
     time docker push nickdsnyder/config:latest
     echo "Pushed :latest"
