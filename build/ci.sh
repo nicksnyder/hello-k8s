@@ -9,8 +9,7 @@ go test ./...
 version=`./build/version.sh`
 time docker build \
     -f ./build/base.Dockerfile \
-    -t base:$version \
-    -t base:insiders \
+    -t base:latest \
     --build-arg version=$version \
     .
 
@@ -35,13 +34,15 @@ echo "Built $version"
 
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-time docker push nickdsnyder/frontend:$version
-time docker push nickdsnyder/config:$version
-echo "Pushed :$version"
+if [ "$TRAVIS_BRANCH" = "master" ] ; then
+    time docker push nickdsnyder/frontend:$version
+    time docker push nickdsnyder/config:$version
+    echo "Pushed :$version"
 
-time docker push nickdsnyder/frontend:insiders
-time docker push nickdsnyder/config:insiders
-echo "Pushed :insiders"
+    time docker push nickdsnyder/frontend:insiders
+    time docker push nickdsnyder/config:insiders
+    echo "Pushed :insiders"
+fi
 
 if ./build/semver.sh $version; then
     time docker push nickdsnyder/frontend:latest
