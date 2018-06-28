@@ -17,12 +17,14 @@ time docker build \
     -f ./build/frontend.Dockerfile \
     -t nickdsnyder/frontend:$version \
     -t nickdsnyder/frontend:insiders \
+    -t nickdsnyder/frontend:latest \
     .
 
 time docker build \
     -f ./build/config.Dockerfile \
     -t nickdsnyder/config:$version \
     -t nickdsnyder/config:insiders \
+    -t nickdsnyder/config:latest \
     .
 
 echo "Built $version"
