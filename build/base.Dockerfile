@@ -2,10 +2,10 @@
 FROM golang:1.10.1-alpine
 WORKDIR /go/src/github.com/nicksnyder/hello-server
 COPY . .
-ARG dockerTag
-RUN test -n "$dockerTag"
+ARG version
+RUN test -n "$version"
 RUN go install \
     -v \
-    -ldflags "-X github.com/nicksnyder/hello-server/pkg/binary.dockerTag=$dockerTag" \
+    -ldflags "-X github.com/nicksnyder/hello-server/pkg/binary.version=$version" \
     ./cmd/config \
     ./cmd/frontend

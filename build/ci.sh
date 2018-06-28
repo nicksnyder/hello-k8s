@@ -1,30 +1,32 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
+cd "$(dirname "${BASH_SOURCE[0]}")/.." # cd to repo root dir
+
 go test ./...
 
-DOCKER_TAG=`./build/docker_tag.sh`
+version=`./build/version.sh`
 time docker build \
     -f ./build/base.Dockerfile \
-    -t base:$DOCKER_TAG \
-    -t base:latest \
-    --build-arg dockerTag=$DOCKER_TAG \
+    -t base:$version \
+    -t base:insiders \
+    --build-arg version=$version \
     .
 
 time docker build \
     -f ./build/frontend.Dockerfile \
-    -t nickdsnyder/frontend:$DOCKER_TAG \
-    -t nickdsnyder/frontend:latest \
+    -t nickdsnyder/frontend:$version \
+    -t nickdsnyder/frontend:insiders \
     .
 
 time docker build \
     -f ./build/config.Dockerfile \
-    -t nickdsnyder/config:$DOCKER_TAG \
-    -t nickdsnyder/config:latest \
+    -t nickdsnyder/config:$version \
+    -t nickdsnyder/config:insiders \
     .
 
-echo "Built $DOCKER_TAG"
+echo "Built $version"
 
 # if test -n "$(git status --porcelain)"; then
 #     echo "Skipping push due to dirty working copy"
@@ -33,16 +35,24 @@ echo "Built $DOCKER_TAG"
 
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-time docker push nickdsnyder/frontend:$DOCKER_TAG
-time docker push nickdsnyder/config:$DOCKER_TAG
-time docker push nickdsnyder/frontend:latest
-time docker push nickdsnyder/config:latest
+time docker push nickdsnyder/frontend:$version
+time docker push nickdsnyder/config:$version
+echo "Pushed :$version"
 
-echo "Pushed $DOCKER_TAG"
+time docker push nickdsnyder/frontend:insiders
+time docker push nickdsnyder/config:insiders
+echo "Pushed :insiders"
+
+if ./build/semver.sh $version; then
+    time docker push nickdsnyder/frontend:latest
+    time docker push nickdsnyder/config:latest
+    echo "Pushed :latest"
+fi
+
 
 # This is how auto-deploy would work from CI.
 # ./deploy/apply.sh \
-#     --set frontend.version=$DOCKER_TAG \
-#     --set config.version=$DOCKER_TAG
+#     --set frontend.version=$version \
+#     --set config.version=$version
 
-# echo "Deployed $DOCKER_TAG"
+# echo "Deployed $version"

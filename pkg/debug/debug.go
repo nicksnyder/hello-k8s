@@ -22,9 +22,8 @@ func WriteData(w io.Writer) error {
 	enc := json.NewEncoder(w)
 	enc.SetIndent("", "  ")
 	return enc.Encode(map[string]interface{}{
-		"DockerTag":      binary.DockerTag(),
-		"ProductVersion": binary.ProductVersion(),
-		"Host":           host,
-		"User":           u,
+		"Version": binary.Version(),
+		"Host":    host,
+		"User":    u,
 	})
 }
