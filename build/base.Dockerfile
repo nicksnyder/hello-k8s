@@ -1,5 +1,5 @@
 # This dockerfile builds all binaries for the project.
-FROM golang:1.10.1-alpine
+FROM golang:1.10.3-alpine
 WORKDIR /go/src/github.com/nicksnyder/hello-server
 COPY . .
 ARG version
