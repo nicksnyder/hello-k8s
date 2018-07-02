@@ -15,6 +15,6 @@ Each semver tag pushes a `:vX.Y.Z` docker image for each service.
 
 ## Deploy
 
-This service can be deployed to Kubernetes using the yaml in `./deploy/base`.
+This service can be deployed to Kubernetes with `./deploy/apply.sh`.
 
 Use [Kustomize](https://github.com/kubernetes-sigs/kustomize) if you need to customize the yaml.
