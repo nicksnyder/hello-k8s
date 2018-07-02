@@ -1,0 +1,6 @@
+resources:
+- config.Deploymeny.yaml
+- config.PersistentVolume.yaml
+- config.Service.yaml
+- frontend.Deployment.yaml
+- frontend.Service.yaml

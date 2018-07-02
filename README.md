@@ -1,9 +1,20 @@
 # Hello server
 
 This is a multi-service server application. There are two services:
+
 - Frontend
 - Config
 
-Each commit builds, tags, and pushes a new docker image for each service.
+## Build
 
-Use the [helm chart](https://github.com/nicksnyder/hello-server-chart) to deploy to Kubernetes.
+Each commit builds and pushes a tagged docker image for each service.
+
+Each commit to master pushes a `:insiders` docker image for each service.
+
+Each semver tag pushes a `:vX.Y.Z` docker image for each service.
+
+## Deploy
+
+This service can be deployed to Kubernetes using the yaml in `./deploy/base`.
+
+Use [Kustomize](https://github.com/kubernetes-sigs/kustomize) if you need to customize the yaml.
