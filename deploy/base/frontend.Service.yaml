@@ -2,6 +2,8 @@ kind: Service
 apiVersion: v1
 metadata:
   name: frontend
+  labels:
+    app: hello-server
 spec:
   type: NodePort
   selector:
