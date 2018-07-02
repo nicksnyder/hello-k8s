@@ -1,6 +1,6 @@
 resources:
-- config.Deploymeny.yaml
-- config.PersistentVolume.yaml
+- config.Deployment.yaml
+- config.PersistentVolumeClaim.yaml
 - config.Service.yaml
 - frontend.Deployment.yaml
 - frontend.Service.yaml
