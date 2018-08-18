@@ -19,12 +19,11 @@ spec:
           persistentVolumeClaim:
             claimName: config-persistent-volume-claim
         - configMap:
-            defaultMode: 464
             name: config-map
           name: config-map
       containers:
         - name: config
-          image: "nickdsnyder/config:v1.0.0"
+          image: "nickdsnyder/config:v1.0.1"
           env:
             - name: CONFIG_PORT
               value: "8080"
