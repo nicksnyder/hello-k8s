@@ -14,6 +14,7 @@ import (
 )
 
 var configFile string
+var configMap string
 
 func main() {
 	port := env.MustGet("CONFIG_PORT")
@@ -28,13 +29,32 @@ func main() {
 	}
 	configFile = filepath.Join(path, "config.json")
 
+	configMap = os.Getenv("CONFIG_MAP")
+	if path == "" {
+		panic("CONFIG_MAP required")
+	}
+
 	server := apphttp.NewServeMux()
 	server.HandleErrFunc("/file", handleFile)
+	server.HandleErrFunc("/configmap", handleConfigMap)
 
 	log.Printf("listening on :%s\n", port)
 	if err := http.ListenAndServe(":"+port, server); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func handleConfigMap(w http.ResponseWriter, r *http.Request) error {
+	b, err := ioutil.ReadFile(configMap)
+	if err != nil {
+		return err
+	}
+	if err := debug.WriteData(w); err != nil {
+		return err
+	}
+	w.Write([]byte("configmap"))
+	_, err = w.Write(b)
+	return err
 }
 
 func handleFile(w http.ResponseWriter, r *http.Request) error {

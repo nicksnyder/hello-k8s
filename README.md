@@ -1,9 +1,6 @@
 # Hello server
 
-This is a multi-service server application. There are two services:
-
-- Frontend
-- Config
+This is a test application with multiple services so I can experiment with Kubernetes and Docker.
 
 ## Build
 
@@ -16,5 +13,3 @@ Each semver tag pushes a `:vX.Y.Z` docker image for each service.
 ## Deploy
 
 This service can be deployed to Kubernetes with `./deploy/apply.sh`.
-
-Use [Kustomize](https://github.com/kubernetes-sigs/kustomize) if you need to customize the yaml.

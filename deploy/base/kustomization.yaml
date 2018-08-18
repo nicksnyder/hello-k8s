@@ -1,6 +1,0 @@
-resources:
-- config.Deployment.yaml
-- config.PersistentVolumeClaim.yaml
-- config.Service.yaml
-- frontend.Deployment.yaml
-- frontend.Service.yaml
