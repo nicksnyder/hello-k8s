@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-1
+  labels:
+    app: hello-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: config-1
+  template:
+    metadata:
+      labels:
+        name: config-1
+    spec:
+      volumes:
+      - name: config-persistent-volume-1
+        persistentVolumeClaim:
+          claimName: config-1
+      containers:
+      - name: config-1
+        image: "nickdsnyder/config:v1.0.0"
+        env:
+        - name: CONFIG_PORT
+          value: "8080"
+        - name: CONFIG_PATH
+          value: "/config"
+        ports:
+        - containerPort: 8080
+          name: http
+        volumeMounts:
+          - mountPath: "/config"
+            name: config-persistent-volume-1
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080

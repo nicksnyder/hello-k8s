@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: config 
+  labels:
+    app: hello-server 
+    name: config
+spec:
+  clusterIP: None
+  ports:
+  - port: 8080
+    name: web
+  selector:
+    app: hello-server
+    name: config
+---    
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: config
+  labels:
+    app: hello-server
+    name: config
+spec:
+  serviceName: "config"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-server
+      name: config
+  template:
+    metadata:
+      labels:
+        app: hello-server
+        name: config
+    spec:
+      containers:
+      - name: config
+        image: "nickdsnyder/config:v1.0.0"
+        env:
+        - name: CONFIG_PORT
+          value: "8080"
+        - name: CONFIG_PATH
+          value: "/config"
+        ports:
+        - containerPort: 8080
+          name: http
+        volumeMounts:
+          - mountPath: "/config"
+            name: config-file
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+  volumeClaimTemplates:
+  - metadata:
+      name: config-file
+      labels:
+        app: hello-server
+    spec:
+      # storageClassName: standard
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+
