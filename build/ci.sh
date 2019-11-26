@@ -34,8 +34,8 @@ echo "Built $version"
 #     exit
 # fi
 
-if [ ! -z "${DOCKER_PASSWORD}"] ; then
-    echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+if [ ! -z "${DOCKER_PASSWORD}"]; then
+    echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 fi
 
 if [ "$TRAVIS_BRANCH" = "master" ] ; then
