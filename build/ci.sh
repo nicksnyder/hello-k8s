@@ -34,7 +34,7 @@ echo "Built $version"
 #     exit
 # fi
 
-if [ ! -z "${DOCKER_PASSWORD}"]; then
+if [ !-z "${DOCKER_PASSWORD}" ] ; then
     echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 fi
 
