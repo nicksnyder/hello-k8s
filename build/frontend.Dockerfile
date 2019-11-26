@@ -1,7 +1,7 @@
 FROM base AS base 
 
 # Create a minimal image with just the frontend service.
-FROM alpine:3.7
+FROM alpine:3.10.3
 RUN apk add --no-cache \
     ca-certificates \
     tini

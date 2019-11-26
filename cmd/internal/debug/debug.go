@@ -6,7 +6,7 @@ import (
 	"os"
 	"os/user"
 
-	"github.com/nicksnyder/hello-server/pkg/binary"
+	"github.com/nicksnyder/hello-server/cmd/internal/binary"
 )
 
 // WriteData writes debug data to w.

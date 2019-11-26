@@ -5,9 +5,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/nicksnyder/hello-server/pkg/debug"
-	"github.com/nicksnyder/hello-server/pkg/env"
-	apphttp "github.com/nicksnyder/hello-server/pkg/http"
+	"github.com/nicksnyder/hello-server/cmd/internal/debug"
+	"github.com/nicksnyder/hello-server/cmd/internal/env"
+	apphttp "github.com/nicksnyder/hello-server/cmd/internal/http"
 )
 
 func main() {

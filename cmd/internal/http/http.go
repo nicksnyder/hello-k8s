@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/nicksnyder/hello-server/pkg/debug"
+	"github.com/nicksnyder/hello-server/cmd/internal/debug"
 )
 
 type ServeMux struct {
